@@ -1,0 +1,176 @@
+@font-face {
+    font-family: GOverlord;
+    src: url(Fonts/Grunge-Overlords\ PERSONAL\ USE\ ONLY.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: GPoster; 
+    src: url(Fonts/GrungePoster-Regular.ttf) format('truetype'); 
+  }
+
+  @font-face {
+    font-family: WOBlack; 
+    src: url(Fonts/White\ On\ Black.ttf) format('truetype'); 
+  }
+
+:root {
+    --pink: #CA277C;
+    --black: #271C26;
+    --white: #F5F5F5;
+    --gray: #9b9b9b;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: GOverlord, sans-serif;
+    line-height: 1.2;
+  }
+
+  section {
+    width: 100%;
+    padding: 48px 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero {
+    background: url('hero-graffiti.jpg') center/cover no-repeat;
+    height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 56px;
+    text-transform: uppercase;
+    color: var(--white);
+    background: rgba(0,0,0,0.6);
+    padding: 20px 28px;
+  }
+
+  .tagline {
+    background: url('grunge-bg.jpg') center/cover no-repeat;
+  }
+
+  .tagline h2 {
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  .tagline h2 span {
+    color: var(--pink);
+  }
+
+  .tagline p {
+    margin-top: 12px;
+    font-size: 20px;
+    color: var(--gray);
+  }
+
+  .event {
+    background: #111;
+    text-align: left;
+  }
+
+  .event h3 {
+    font-size: 28px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .event-card {
+    background: #000;
+    border: 2px solid var(--pink);
+    padding: 16px;
+  }
+
+  .event-card img {
+    width: 100%;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .event-meta {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    text-align: center;
+    background: var(--pink);
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 8px;
+  }
+
+  .discover h2 {
+    font-size: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .spot {
+    background: #111;
+  }
+
+  .spot h3 {
+    font-size: 42px;
+    font-family: 'GOverlord', sans-serif;
+    text-transform: uppercase;
+  }
+
+  .spot img {
+    width: 100%;
+    margin: 16px 0;
+  }
+
+  .spot-info {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .location {
+    background: #000;
+  }
+
+  .map {
+    width: 100%;
+    height: 240px;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--pink);
+    font-weight: 700;
+  }
+
+  footer {
+    padding: 32px 20px;
+    background: #000;
+    text-align: center;
+    font-size: 14px;
+    color: var(--gray);
+  }
+
+  footer a {
+    color: var(--white);
+    text-decoration: none;
+    display: block;
+    margin-top: 8px;
+  }
