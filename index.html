@@ -12,38 +12,97 @@
 <body>
 
   <section class="hero">
-    <h1>SkATE SPOT</h1>
+    <img src="Images/MainGarage.png" alt="" class="bg-image">
+    <img src="Images/Logo.png" alt="SkateMesh Logo">
   </section>
 
   <section class="tagline">
-    <h2>SIMPLE PLACE <br><span>FOR SIMPLE PEOPLE</span></h2>
+    <h1>SIMPLE PLACE</h1> <h2 class="WOB">FOR SIMPLE<br> PEOPLE</h2>
     <p>That just want to skate</p>
   </section>
 
   <section class="event">
-    <h3>Event of the week</h3>
+    <img src="Images/BackgroundGrunge.png" alt="" class="bg-image">
+    <h3>Session of the week</h3>
     <div class="event-card">
-      <img src="event.jpg" alt="Skate Event" />
-      <div class="event-meta">Park Location: Hobinspot<br>People coming: 14</div>
+      <img src="Images/SessionImage.png" alt="Skate Session" />
+      <div class="event-meta">Park Location: Robbiespottet<br>People coming: 14</div>
       <a href="#" class="btn">I'm coming too!</a>
     </div>
   </section>
 
   <section class="discover">
     <h2>Discover<br>Skate<br>Parks</h2>
+    <img src="Images/Conc.png" alt="" class="discover-bg">
   </section>
 
-  <section class="spot">
-    <h3>Robbie Spottet</h3>
-    <img src="spot.jpg" alt="Skate Spot" />
-    <div class="spot-info">Difficulty: Intermediate<br>Availability: Open now</div>
+
+  <div class="carousel-wrapper">
+  <section class="spot-carousel">
+
+
+    <div class="spot">
+    <h3>Robbie<br>Spottet</h3>
+    <img src="Images/RSImage.png" alt="Robbie Spottet" class="spot-image" />
+    <div class="spot-info">
+    <span class="label">Difficulty:</span> <span class="value">Intermediate</span><br>
+    <span class="label">Availability:</span> <span class="value">Open now</span>
+    </div>
+    <a href="robbieSpottet.html" class="btn">Check out now</a>
+    <img src="Images/BlackBlur.png" alt="" class="black-blur">
+    </div>
+    
+    
+    <div class="spot">
+    <h3>Skate<br>Scene</h3>
+    <img src="Images/ASSImage.png" alt="Kate Scene" class="spot-image" />
+    <div class="spot-info">
+    <span class="label">Difficulty:</span> <span class="value">Intermediate</span><br>
+    <span class="label">Availability:</span> <span class="value">Open now</span>
+    </div>
     <a href="#" class="btn">Check out now</a>
+    <img src="Images/BlackBlur.png" alt="" class="black-blur">
+    </div>
+    
+    
+    <div class="spot">
+    <h3>Laessoes<br>Gade</h3>
+    <img src="Images/LGImage.png" alt="Læssøes Gade" class="spot-image" />
+    <div class="spot-info">
+    <span class="label">Difficulty:</span> <span class="value">Intermediate</span><br>
+    <span class="label">Availability:</span> <span class="value">Open now</span>
+    </div>
+    <a href="#" class="btn">Check out now</a>
+    <img src="Images/BlackBlur.png" alt="" class="black-blur">
+    </div>
+    
+
   </section>
 
-  <section class="location">
-    <h3>Location</h3>
-    <div class="map">MAP PLACEHOLDER</div>
-  </section>
+  <button class="carousel-arrow left" aria-label="Previous">
+    <img src="Images/Arrow Left.png" alt="">
+  </button>
+  
+  <button class="carousel-arrow right" aria-label="Next">
+    <img src="Images/Arrow Right.png" alt="">
+  </button>
+
+</div>
+
+
+<section class="location">
+  <h3>Location</h3>
+  <div class="map-wrapper">
+    <img src="Images/Map.png" usemap="#image-map" class="map-image">
+    <map name="image-map">
+      <area target="" alt="SkateScene" title="SkateScene" href="#" coords="575,3793,822,3970" shape="rect">
+      <area target="" alt="RobbieSpottet" title="RobbieSpottet" href="#" coords="1580,674,1889,838" shape="rect">
+      <area target="" alt="LaessoesGade" title="LaessoesGade" href="#" coords="2091,655,2393,838" shape="rect">
+    </map>
+  </div>
+</section>
+
+
 
   <footer>
     <a href="#">About</a>
@@ -52,4 +111,139 @@
   </footer>
 
 </body>
+
+<script>
+  const carousel = document.querySelector('.spot-carousel');
+  const cards = carousel.querySelectorAll('.spot');
+  const prevBtn = document.querySelector('.carousel-arrow.left');
+  const nextBtn = document.querySelector('.carousel-arrow.right');
+  const mapImage = document.querySelector('.map-image');
+  const mapWrapper = document.querySelector('.map-wrapper');
+
+  let index = 0;
+  let imageLoaded = false;
+  let naturalWidth = 0;
+  let naturalHeight = 0;
+
+  // Map coordinates: [x1, y1, x2, y2] for each area
+  // Order matches carousel: RobbieSpottet (0), SkateScene (1), LaessoesGade (2)
+  const mapCoordinates = [
+    { name: 'RobbieSpottet', coords: [1580, 674, 1889, 838] },
+    { name: 'SkateScene', coords: [575, 3793, 822, 3970] },
+    { name: 'LaessoesGade', coords: [2091, 655, 2393, 838] }
+  ];
+
+  // Wait for image to load to get natural dimensions
+  mapImage.addEventListener('load', () => {
+    naturalWidth = mapImage.naturalWidth;
+    naturalHeight = mapImage.naturalHeight;
+    imageLoaded = true;
+    updateMap(index, false); // Initial position without animation
+  });
+
+  // If image is already loaded
+  if (mapImage.complete && mapImage.naturalWidth > 0) {
+    naturalWidth = mapImage.naturalWidth;
+    naturalHeight = mapImage.naturalHeight;
+    imageLoaded = true;
+    updateMap(index, false); // Initial position without animation
+  }
+
+  function updateCarousel() {
+    const cardWidth = cards[0].getBoundingClientRect().width + 24;
+    carousel.style.transform = `translateX(${-index * cardWidth}px)`;
+  }
+
+  function calculateMapTransform(coordIndex) {
+    if (!imageLoaded) return { translateX: 0, translateY: 0, scale: 1 };
+
+    const coords = mapCoordinates[coordIndex].coords;
+    const [x1, y1, x2, y2] = coords;
+    
+    // Get viewport dimensions
+    const viewportWidth = mapWrapper.clientWidth;
+    const viewportHeight = mapWrapper.clientHeight;
+    
+    // Get displayed image dimensions (image is height: 100%, width: auto)
+    const displayedHeight = viewportHeight;
+    const displayedWidth = (naturalWidth / naturalHeight) * displayedHeight;
+    
+    // Calculate scale ratio between displayed and natural size
+    const scaleRatioX = displayedWidth / naturalWidth;
+    const scaleRatioY = displayedHeight / naturalHeight;
+    
+    // Convert coordinates from natural size to displayed size
+    const displayedX1 = x1 * scaleRatioX;
+    const displayedY1 = y1 * scaleRatioY;
+    const displayedX2 = x2 * scaleRatioX;
+    const displayedY2 = y2 * scaleRatioY;
+    
+    // Calculate center of the area in displayed coordinates
+    const centerX = (displayedX1 + displayedX2) / 2;
+    const centerY = (displayedY1 + displayedY2) / 2;
+    
+    // Calculate dimensions of the area in displayed coordinates
+    const areaWidth = displayedX2 - displayedX1;
+    const areaHeight = displayedY2 - displayedY1;
+    
+    // Calculate zoom scale to fit area nicely in viewport (with minimal padding for maximum zoom)
+    const scaleX = viewportWidth / (areaWidth * 0.7); // 0.7x padding for even more zoom
+    const scaleY = viewportHeight / (areaHeight * 0.7);
+    const scale = Math.min(scaleX, scaleY, 8); // Cap max zoom at 8x for even more zoom
+    
+    // Calculate translation to center the area perfectly in the wrapper
+    // After scaling, the center point position changes
+    const scaledCenterX = centerX * scale;
+    const scaledCenterY = centerY * scale;
+    // Center the area in the viewport, then shift 20px to the left
+    const translateX = viewportWidth / 2 - scaledCenterX;
+    const translateY = viewportHeight / 2 - scaledCenterY;
+    
+    return { translateX, translateY, scale };
+  }
+
+  function updateMap(coordIndex, animate = true) {
+    if (!imageLoaded) return;
+
+    const transform = calculateMapTransform(coordIndex);
+    
+    if (animate) {
+      // Calculate scale to fit image width to wrapper width
+      const viewportWidth = mapWrapper.clientWidth;
+      const displayedHeight = mapWrapper.clientHeight;
+      const displayedWidth = (naturalWidth / naturalHeight) * displayedHeight;
+      const fitWidthScale = viewportWidth / displayedWidth;
+      
+      // Zoom out first - only until image width equals wrapper width
+      mapImage.style.transition = 'transform 0.3s ease';
+      mapImage.style.transform = `translate(0px, 0px) scale(${fitWidthScale})`;
+      
+      // Then zoom in to new position
+      setTimeout(() => {
+        mapImage.style.transition = 'transform 0.6s ease';
+        mapImage.style.transform = `translate(${transform.translateX}px, ${transform.translateY}px) scale(${transform.scale})`;
+      }, 300);
+    } else {
+      // No animation for initial load
+      mapImage.style.transition = 'none';
+      mapImage.style.transform = `translate(${transform.translateX}px, ${transform.translateY}px) scale(${transform.scale})`;
+    }
+  }
+
+  function updateCarouselAndMap() {
+    updateCarousel();
+    updateMap(index, true); // Animate map transition
+  }
+
+  nextBtn.addEventListener('click', () => {
+    index = (index + 1) % cards.length;
+    updateCarouselAndMap();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    index = (index - 1 + cards.length) % cards.length;
+    updateCarouselAndMap();
+  });
+
+</script>
 </html>
