@@ -40,6 +40,9 @@
 
   body {
     background: var(--black);
+    background-image: url('Images/BackgroundCar.png');
+    background-repeat: repeat-y;
+    background-position: top center;
     color: var(--white);
     font-family: "YTMe";
     font-weight: normal;
@@ -318,7 +321,7 @@
     padding: 14px;
     text-align: center;
     background: var(--pink);
-    color: #000;
+    color: var(--white);
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
@@ -399,6 +402,7 @@
     position: relative;
     display: flex;
     padding: 26px;
+    padding-bottom: 10px;
     flex-direction: column;
     justify-content: flex-end;
     overflow: hidden;
@@ -413,19 +417,31 @@
     background: transparent;
     position: absolute;
     top: 0px;
-    left: 26px;
-    transform: none;
-    z-index: 2;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
     display: inline-block;
-    text-align: left;
+    text-align: center;
   }
 
   .spot-image {
     width: 100%;
-    margin-top: 100px;
+    height: auto;
+    margin-top: 20px;
     display: block;
     position: relative;
     z-index: 1;
+  }
+
+  .black-blur {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    margin: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: transparent;
   }
 
   .spot-background {
@@ -435,8 +451,9 @@
     left: 0;
     top: 0;
     margin: 0;
-    z-index: 0;
+    z-index: 2;
     pointer-events: none;
+    background: transparent;
     transform: rotate(90deg) scale(1.15);
     object-fit: cover;
   }
@@ -444,11 +461,11 @@
   .spot-info,
   .spot .btn {
     position: relative;
-    z-index: 3;
+    z-index: 10;
   }
 
   .spot-info {
-    font-size: 24px;
+    font-size: 18px;
     margin-bottom: 12px;
     display: flex;
     align-items: center;
@@ -458,11 +475,13 @@
 
   .spot-info .label {
     color: var(--gray);
-    font-size: 24px;
+    font-size: 16px;
+    align-items: center;
   }
 
   .spot-info .value {
-    font-size: 1.3em;
+    font-size: 1.4em;
+    color: var(--white);
   }
 
   .spot .btn {
@@ -484,17 +503,49 @@
     cursor: grab;
   }
 
-  .location h3 {
-    font-family: 'WOBlack', sans-serif;
-    font-size: 48px; /* 70% bigger than typical h3 (28px * 1.7 ≈ 48px) */
-    text-align: left;
+
+  .location-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 16px;
+    gap: 20px;
+  }
+
+  .location-title-left,
+  .location-title-right {
+    flex: 1;
+  }
+
+  .location-title-left {
+    font-family: 'WOBlack', sans-serif;
+    font-size: 64px;
+    text-align: left !important;
     line-height: 1.2;
     color: var(--white);
+    margin: 0;
   }
+
+  .location-title-right {
+    font-family: 'WOBlack', sans-serif;
+    font-size: 64px;
+    text-align: right !important;
+    line-height: 1.2;
+    color: var(--white);
+    margin: 0;
+  }
+
+  
 
   .pink-text {
     color: var(--pink);
+  }
+
+
+  .location h3 {
+    font-size: 48px;
+    text-align: left;
+    margin-bottom: 16px;
   }
 
   .location {
