@@ -25,6 +25,12 @@
     font-style: normal;
   }
 
+  .WOB {
+    font-family: "WOBlack";
+    color: var(--pink);
+  }
+
+
 :root {
     --pink: #CA277C;
     --black: #271C26;
@@ -62,7 +68,7 @@
   }
 
   .logo-link img {
-    width: 60px;
+    width: 100px;
     height: auto;
     display: block;
   }
@@ -331,7 +337,7 @@
   .discover {
     position: relative;
     overflow: hidden;
-    padding: 80px 24px;
+    padding: 30px 24px;
     margin: 50px 0px;
   }
 
@@ -428,6 +434,14 @@
     width: 80%;
     height: auto;
     position: absolute;
+    bottom: 100px;
+    z-index: 1;
+  }
+
+  .park-image {
+    width: 100%;
+    height: auto;
+    position: relative;
     bottom: 100px;
     z-index: 1;
   }
@@ -537,7 +551,7 @@
 
   .location-title-left {
     font-family: 'WOBlack', sans-serif;
-    font-size: 64px;
+    font-size: 60px;
     text-align: left !important;
     line-height: 1.2;
     color: var(--white);
@@ -546,7 +560,7 @@
 
   .location-title-right {
     font-family: 'WOBlack', sans-serif;
-    font-size: 64px;
+    font-size: 60px;
     text-align: right !important;
     line-height: 1.2;
     color: var(--white);
@@ -554,14 +568,13 @@
   }
 
   
-
   .pink-text {
     color: var(--pink);
   }
 
 
   .location h3 {
-    font-size: 48px;
+    font-size: 42px;
     text-align: left;
     margin-bottom: 16px;
   }
