@@ -416,7 +416,7 @@
     color: var(--white);
     background: transparent;
     position: absolute;
-    top: 0px;
+    top: 80px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -436,7 +436,7 @@
   .black-blur {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 80%;
     transform: translate(-50%, -50%) scale(0.8);
     margin: 0;
     z-index: 2;
@@ -460,8 +460,9 @@
 
   .spot-info,
   .spot .btn {
-    position: relative;
+    position: absolute;
     z-index: 10;
+    width: calc(100% - 52px);
   }
 
   .spot-info {
@@ -470,7 +471,10 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    bottom: 70px;
     gap: 12px;
+    left: 26px;
+    right: 26px;
   }
 
   .spot-info .label {
