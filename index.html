@@ -24,10 +24,18 @@
   <section class="event">
     <img src="Images/BackgroundGrunge.png" alt="" class="bg-image">
     <h3>Session of the week</h3>
+
     <div class="event-card">
+      <div class="event-wrapper">
+      <span class="attendance-badge">Attending</span>
       <img src="Images/SessionImage.png" alt="Skate Session" />
-      <div class="event-meta">Park Location: Robbiespottet<br>People coming: 14</div>
-      <a href="#" class="btn">I'm coming too!</a>
+      </div>
+
+      <div class="event-meta">
+        Park Location: Robbiespottet<br>
+        People coming: <span id="people-count">14</span>
+      </div>
+      <a href="#"  class="btn event-btn">I'm coming too!</a>
     </div>
   </section>
 
@@ -113,6 +121,35 @@
 </body>
 
 <script>
+  const eventBtn = document.querySelector('.event-btn');
+  const peopleCountEl = document.getElementById('people-count');
+  const badge = document.querySelector('.attendance-badge');
+
+  let attending = false;
+  let peopleCount = 14;
+
+  eventBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    attending = !attending;
+
+  if (attending) {
+    peopleCount++;
+    eventBtn.classList.add('attending');
+    eventBtn.textContent = 'Cancel attendance';
+    badge.style.display = 'block';
+    peopleCountEl.classList.add('attending');
+  } else {
+    peopleCount--;
+    eventBtn.classList.remove('attending');
+    eventBtn.textContent = "I'm coming too!";
+    badge.style.display = 'none';
+    peopleCountEl.classList.remove('attending');
+  }
+    peopleCountEl.textContent = peopleCount;
+  });
+
+
   const carousel = document.querySelector('.spot-carousel');
   const cards = carousel.querySelectorAll('.spot');
   const prevBtn = document.querySelector('.carousel-arrow.left');
