@@ -12,6 +12,27 @@
     <img src="Images/Logo.png" alt="SkateMesh Logo">
   </a>
 
+  <button class="burger-menu-btn" id="burger-menu-btn" aria-label="Menu">
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+    <span class="burger-line"></span>
+  </button>
+
+  <div class="slide-menu-backdrop" id="slide-menu-backdrop"></div>
+  <div class="slide-menu" id="slide-menu">
+    <div class="slide-menu-content">
+      <button class="slide-menu-close" id="slide-menu-close" aria-label="Close">&times;</button>
+      <nav class="slide-menu-nav">
+        <a href="index.html">Home</a>
+        <a href="robbieSpottet.html">Robbie Spottet</a>
+        <a href="#">Skate Scene</a>
+        <a href="#">Laessoes Gade</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </div>
+
   <div class="hero-carousel-wrapper">
     <div class="hero-carousel">
       <img src="Images/RobbieSpottet/RS-1.jpeg" alt="Robbie Spottet" class="hero-carousel-image">
@@ -674,6 +695,46 @@
   loadMapImage(routes[currentRouteIndex].src).then(() => {
     mapImage.src = routes[currentRouteIndex].src;
     resetMapView();
+  });
+
+  // Burger menu functionality
+  const burgerMenuBtn = document.getElementById('burger-menu-btn');
+  const slideMenu = document.getElementById('slide-menu');
+  const slideMenuClose = document.getElementById('slide-menu-close');
+
+  const slideMenuBackdrop = document.getElementById('slide-menu-backdrop');
+
+  function openMenu() {
+    slideMenu.classList.add('active');
+    slideMenuBackdrop.classList.add('active');
+    burgerMenuBtn.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    slideMenu.classList.remove('active');
+    slideMenuBackdrop.classList.remove('active');
+    burgerMenuBtn.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (burgerMenuBtn) {
+    burgerMenuBtn.addEventListener('click', openMenu);
+  }
+
+  if (slideMenuClose) {
+    slideMenuClose.addEventListener('click', closeMenu);
+  }
+
+  if (slideMenuBackdrop) {
+    slideMenuBackdrop.addEventListener('click', closeMenu);
+  }
+
+  // Close menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && slideMenu.classList.contains('active')) {
+      closeMenu();
+    }
   });
 </script>
 
