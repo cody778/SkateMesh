@@ -178,6 +178,7 @@
   const nextBtn = document.querySelector('.carousel-arrow.right');
   const mapImage = document.querySelector('.map-image');
   const mapWrapper = document.querySelector('.map-wrapper');
+  let resizeTimeout;
 
   let index = 0;
   let imageLoaded = false;
@@ -302,6 +303,13 @@
   prevBtn.addEventListener('click', () => {
     index = (index - 1 + cards.length) % cards.length;
     updateCarouselAndMap();
+  });
+
+  // Recalculate map transform on resize to keep areas aligned
+  window.addEventListener('resize', () => {
+    if (!imageLoaded) return;
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => updateMap(index, false), 150);
   });
 
 // Burger menu functionality
