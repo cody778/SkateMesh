@@ -86,9 +86,9 @@
   }
 
   .burger-line {
-    width: 28px;
-    height: 3px;
-    background: var(--white);
+    width: 35px;
+    height: 5px;
+    background: var(--pink);
     transition: all 0.3s ease;
     border-radius: 2px;
   }
