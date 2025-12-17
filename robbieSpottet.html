@@ -146,25 +146,31 @@
     </button>
   </div>
 
-  <section>
+  <section class="spot-map-section">
     <div class="location-header">
       <h3 class="location-title-left">SEE<br> THE<br> <span class="pink-text">MAP</span></h3>
       <h3 class="location-title-right"><br><br><br>FIND<br> A<br> <span class="pink-text">ROUTE</span></h3>
     </div>
-    <div class="map-wrapper" id="map-wrapper">
-      <div class="map-container">
-        <img src="Images/Map.png" class="map-image" id="map-image" alt="Map">
+    <div class="map-layout">
+      <div class="route-buttons">
+        <button class="route-button" data-route-index="1">RS to ASS</button>
+        <button class="route-button" data-route-index="2">RS to LG</button>
       </div>
-      <button class="carousel-arrow left map-arrow" id="map-prev-btn" aria-label="Previous Route">
-        <img src="Images/Arrow Left.png" alt="">
-      </button>
-      <button class="carousel-arrow right map-arrow" id="map-next-btn" aria-label="Next Route">
-        <img src="Images/Arrow Right.png" alt="">
-      </button>
-      <div class="map-controls">
-        <button class="map-reset-btn" id="reset-map" aria-label="Reset View">Reset</button>
-        <button class="map-zoom-btn" id="zoom-out" aria-label="Zoom Out">−</button>
-        <button class="map-zoom-btn" id="zoom-in" aria-label="Zoom In">+</button>
+      <div class="map-wrapper" id="map-wrapper">
+        <div class="map-container">
+          <img src="Images/Map.png" class="map-image" id="map-image" alt="Map">
+        </div>
+        <button class="carousel-arrow left map-arrow" id="map-prev-btn" aria-label="Previous Route">
+          <img src="Images/Arrow Left.png" alt="">
+        </button>
+        <button class="carousel-arrow right map-arrow" id="map-next-btn" aria-label="Next Route">
+          <img src="Images/Arrow Right.png" alt="">
+        </button>
+        <div class="map-controls">
+          <button class="map-reset-btn" id="reset-map" aria-label="Reset View">Reset</button>
+          <button class="map-zoom-btn" id="zoom-out" aria-label="Zoom Out">−</button>
+          <button class="map-zoom-btn" id="zoom-in" aria-label="Zoom In">+</button>
+        </div>
       </div>
     </div>
     <a href="https://www.google.com/maps" class="btn">CREATE A ROUTE</a>
@@ -459,6 +465,7 @@
   const zoomInBtn = document.getElementById('zoom-in');
   const zoomOutBtn = document.getElementById('zoom-out');
   const resetBtn = document.getElementById('reset-map');
+  const routeButtons = document.querySelectorAll('.route-button');
 
   // Route images
   const routes = [
@@ -689,6 +696,23 @@
     zoomMap(-ZOOM_STEP, rect.left + rect.width / 2, rect.top + rect.height / 2);
   });
   resetBtn.addEventListener('click', resetMapView);
+
+  // Desktop route buttons: jump directly to specific routes
+  if (routeButtons && routeButtons.length) {
+    routeButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetIndex = parseInt(btn.dataset.routeIndex, 10);
+        if (Number.isNaN(targetIndex)) return;
+        const delta = targetIndex - currentRouteIndex;
+        if (delta !== 0) {
+          switchRoute(delta);
+        }
+
+        routeButtons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  }
 
   // Initialize
   mapImage.style.cursor = 'grab';

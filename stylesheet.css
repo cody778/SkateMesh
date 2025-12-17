@@ -929,6 +929,11 @@
     height: 36px;
   }
 
+  /* Route buttons are desktop-only by default */
+  .spot-map-section .route-buttons {
+    display: none;
+  }
+
 
   .location-header {
     display: flex;
@@ -991,7 +996,7 @@
     color: var(--pink);
     font-weight: 700;
   }
-
+  
   footer {
     padding: 32px 20px;
     text-align: right;
@@ -1002,7 +1007,7 @@
     overflow: hidden;
     padding-top: 130px;
   }
-
+  
   .footer-bg-image {
     position: absolute;
     top: 0px;
@@ -1014,7 +1019,7 @@
     z-index: 0;
     pointer-events: none;
   }
-
+  
   footer a {
     color: var(--white);
     text-decoration: none;
@@ -1023,4 +1028,221 @@
     position: relative;
     z-index: 1;
     font-size: 18px;
+  }
+
+  /* =========================
+     DESKTOP RESPONSIVE LAYOUT
+     ========================= */
+
+  @media (min-width: 768px) {
+    body {
+      background-position: top center;
+      /* Use a rotated pseudo-element background on desktop */
+      background-image: none;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url('Images/BackgroundCar.png');
+      /* Make each tile a square whose side equals the viewport width,
+         then repeat those tiles vertically after rotation */
+      background-size: 100vw 100vw;
+      background-repeat: repeat-y;
+      background-position: top center;
+      background-color: var(--black);
+      transform: rotate(90deg);
+      transform-origin: center center;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-inline: 40px;
+    }
+
+    .hero-carousel-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-carousel {
+      height: 520px;
+    }
+
+    .hero-title-wrapper {
+      bottom: 40px;
+      left: 40px;
+      right: 40px;
+      transform: none;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .hero-title {
+      font-size: 80px;
+      line-height: 1.05;
+    }
+
+    .camera-icon-link {
+      transform: translateY(-60px);
+    }
+
+    .camera-icon-link:hover {
+      transform: translateY(-30px) scale(1.1);
+    }
+
+    .description {
+      max-width: 900px;
+      padding-inline: 40px;
+    }
+
+    .description > p {
+      font-size: 20px;
+    }
+
+    .spot-details {
+      max-width: none;
+      justify-content: flex-start;
+    }
+
+    .detail-item {
+      flex: 0 0 auto;
+    }
+
+    .schedule-section {
+      max-width: 520px;
+    }
+
+    .discover {
+      max-width: 1100px;
+      margin-inline: auto;
+    }
+
+    .discover h2 {
+      font-size: 80px;
+    }
+
+    .carousel-wrapper {
+      max-width: 1100px;
+      margin: 0 auto 40px auto;
+    }
+
+    .spot-carousel {
+      padding-inline: 60px;
+    }
+
+    .spot {
+      min-width: 360px;
+      height: 560px;
+    }
+
+    .park-info {
+      font-size: 20px;
+    }
+
+    .location-header {
+      margin-bottom: 32px;
+    }
+
+    .location-title-left,
+    .location-title-right {
+      font-size: 72px;
+    }
+
+    .map-wrapper {
+    height: 500px;
+  }
+
+  /* Desktop map layout for Robbie Spottet page */
+  .spot-map-section .map-layout {
+    display: flex;
+    align-items: stretch;
+    gap: 32px;
+  }
+
+  .spot-map-section .route-buttons {
+    display: none;
+  }
+
+  .spot-map-section .map-wrapper {
+    flex: 1.4;
+  }
+
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-inline: 40px;
+      background: var(--black);
+      padding-top: 32px;
+      min-height: auto;
+    }
+
+    .footer-bg-image {
+      display: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    section {
+      padding-inline: 60px;
+    }
+
+    .description {
+      max-width: 1000px;
+    }
+
+    .schedule-section {
+      max-width: 600px;
+    }
+
+    .hero-title {
+      font-size: 96px;
+    }
+
+    .spot {
+      min-width: 380px;
+      height: 600px;
+    }
+
+    /* On larger desktop, move map further right and show route buttons */
+    .spot-map-section .map-layout {
+      align-items: flex-start;
+    }
+
+    .spot-map-section .route-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 0 0 220px;
+      margin-top: 12px;
+    }
+
+    .route-button {
+      background: transparent;
+      border: 2px solid var(--pink);
+      color: var(--white);
+      font-family: 'YTMe', sans-serif;
+      font-size: 18px;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .route-button:hover,
+    .route-button.active {
+      background: var(--pink);
+      color: var(--white);
+    }
+
+    /* Hide arrow buttons on desktop; they stay on mobile */
+    .map-arrow {
+      display: none;
+    }
   }
