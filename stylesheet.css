@@ -589,6 +589,7 @@
 
   .event {
     text-align: left;
+    max-width: 800px;
   }
 
   .event-image-wrapper {
@@ -667,7 +668,7 @@
   .discover {
     position: relative;
     overflow: hidden;
-    padding: 30px 24px;
+    padding: 30px 0px;
     margin: 50px 0px;
   }
 
@@ -1160,19 +1161,17 @@
     height: 500px;
   }
 
-  /* Desktop map layout for Robbie Spottet page */
+  /* Desktop map layout for Robbie Spottet page and Location section */
   .spot-map-section .map-layout {
-    display: flex;
-    align-items: flex-start;
-    gap: 32px;
+    display: block; /* Stack on mobile */
   }
 
   .spot-map-section .route-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex: 0 0 220px;
-    margin-top: 12px;
+    display: none; /* Hidden on mobile */
+  }
+
+  .spot-map-section .map-wrapper {
+    width: 100%;
   }
 
   .route-button {
@@ -1198,6 +1197,21 @@
   .map-arrow {
     display: none;
   }
+
+    /* Desktop: show location buttons and layout */
+    .spot-map-section .map-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+    }
+
+    .spot-map-section .route-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 0 0 220px;
+      margin-top: 12px;
+    }
 
     .spot-map-section .map-wrapper {
       flex: 1.4;
