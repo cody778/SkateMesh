@@ -279,17 +279,46 @@
   let index = 0;
 
   function updateCarousel() {
-    const cardWidth = cards[0].getBoundingClientRect().width + 24;
-    carousel.style.transform = `translateX(${-index * cardWidth}px)`;
+    if (window.innerWidth >= 1024) {
+      // Desktop: keep equal padding on both sides when jumping between first and last cards
+      const wrapperWidth = carouselWrapper.getBoundingClientRect().width;
+      const totalWidth = carousel.scrollWidth; // includes padding + gaps
+
+      // First card: natural position (left padding from CSS)
+      // Last card: shift so the right edge aligns with the wrapper's right edge,
+      // preserving the same padding on the right side.
+      let translateX = 0;
+      if (index === cards.length - 1) {
+        translateX = wrapperWidth - totalWidth;
+      }
+
+      carousel.style.transform = `translateX(${translateX}px)`;
+    } else {
+      // Mobile / tablet: step through cards one by one as before
+      const cardWidth = cards[0].getBoundingClientRect().width + 24;
+      carousel.style.transform = `translateX(${-index * cardWidth}px)`;
+    }
   }
 
   nextBtn.addEventListener('click', () => {
-    index = (index + 1) % cards.length;
+    if (window.innerWidth >= 1024) {
+      // Desktop: jump directly to last card
+      index = cards.length - 1;
+    } else {
+      // Mobile: step through each card as before
+      index = (index + 1) % cards.length;
+    }
     updateCarousel();
   });
 
   prevBtn.addEventListener('click', () => {
-    index = (index - 1 + cards.length) % cards.length;
+    if (window.innerWidth >= 1024) {
+      // Desktop: jump directly to first card
+      index = 0;
+    } else {
+      // Mobile: step through each card as before
+      index = (index - 1 + cards.length) % cards.length;
+    }
     updateCarousel();
   });
 
