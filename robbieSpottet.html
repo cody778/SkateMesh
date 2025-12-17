@@ -487,9 +487,29 @@
   let naturalWidth = 0;
   let naturalHeight = 0;
 
-  const MIN_SCALE = 1.3; // Can't zoom out beyond 100%
   const MAX_SCALE = 15; // Can zoom in much more
   const ZOOM_STEP = 0.2;
+  // Minimum scale is computed dynamically so the map always covers the wrapper
+  function computeMinScale() {
+    if (!imageLoaded) return 1;
+    const rect = mapWrapper.getBoundingClientRect();
+    const wrapperWidth = rect.width;
+    const wrapperHeight = rect.height;
+
+    if (!wrapperWidth || !wrapperHeight || !naturalWidth || !naturalHeight) {
+      return 1;
+    }
+
+    const ratio = naturalWidth / naturalHeight;
+    // At scale = 1, displayedHeight = wrapperHeight, displayedWidth = ratio * wrapperHeight.
+    // Ensure the image is never smaller than the wrapper in either dimension.
+    const minScaleForWidth = wrapperWidth / (ratio * wrapperHeight);
+    const minScaleForHeight = 1; // because displayedHeight = wrapperHeight at scale 1
+
+    return Math.max(1, minScaleForWidth, minScaleForHeight);
+  }
+
+  const MIN_SCALE = 1; // base lower bound; real min enforced by computeMinScale
 
   // Load image and get dimensions
   function loadMapImage(src) {
@@ -505,14 +525,34 @@
     });
   }
 
+  // Constrain translation so the map never leaves empty space inside the wrapper
+  function clampTranslation() {
+    const rect = mapWrapper.getBoundingClientRect();
+    const wrapperWidth = rect.width;
+    const wrapperHeight = rect.height;
+
+    // Image is height: 100% of wrapper, width auto, then scaled.
+    const displayedHeight = wrapperHeight * scale;
+    const displayedWidth = (naturalWidth / naturalHeight) * wrapperHeight * scale;
+
+    const minTranslateX = Math.min(0, wrapperWidth - displayedWidth);
+    const maxTranslateX = 0;
+    const minTranslateY = Math.min(0, wrapperHeight - displayedHeight);
+    const maxTranslateY = 0;
+
+    translateX = Math.min(maxTranslateX, Math.max(minTranslateX, translateX));
+    translateY = Math.min(maxTranslateY, Math.max(minTranslateY, translateY));
+  }
+
   // Update map transform
   function updateMapTransform() {
+    clampTranslation();
     mapImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
   }
 
   // Reset map to default view
   function resetMapView() {
-    scale = 1;
+    scale = computeMinScale();
     translateX = 0;
     translateY = 0;
     updateMapTransform();
@@ -531,7 +571,8 @@
     const zoomPointY = clientY !== undefined ? clientY - rect.top : rect.height / 2;
 
     const oldScale = scale;
-    scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scale + delta));
+    const minScale = computeMinScale();
+    scale = Math.max(minScale, Math.min(MAX_SCALE, scale + delta));
 
     if (scale !== oldScale) {
       // Calculate the point in image coordinates before zoom
@@ -653,7 +694,8 @@
       );
       
       const scaleFactor = distance / touchStartDistance;
-      scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, touchStartScale * scaleFactor));
+      const minScale = computeMinScale();
+      scale = Math.max(minScale, Math.min(MAX_SCALE, touchStartScale * scaleFactor));
       
       const centerX = (touch1.clientX + touch2.clientX) / 2;
       const centerY = (touch1.clientY + touch2.clientY) / 2;
