@@ -279,7 +279,7 @@
   let index = 0;
 
   function updateCarousel() {
-    if (window.innerWidth >= 1024) {
+    if (window.innerWidth >= 768) {
       // Desktop: keep equal padding on both sides when jumping between first and last cards
       const wrapperWidth = carouselWrapper.getBoundingClientRect().width;
       const totalWidth = carousel.scrollWidth; // includes padding + gaps
@@ -301,7 +301,7 @@
   }
 
   nextBtn.addEventListener('click', () => {
-    if (window.innerWidth >= 1024) {
+    if (window.innerWidth >= 768) {
       // Desktop: jump directly to last card
       index = cards.length - 1;
     } else {
@@ -312,7 +312,7 @@
   });
 
   prevBtn.addEventListener('click', () => {
-    if (window.innerWidth >= 1024) {
+    if (window.innerWidth >= 768) {
       // Desktop: jump directly to first card
       index = 0;
     } else {

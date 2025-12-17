@@ -1005,7 +1005,7 @@
     position: relative;
     min-height: 300px;
     overflow: hidden;
-    padding-top: 130px;
+    padding-top: 180px;
   }
   
   .footer-bg-image {
@@ -1045,15 +1045,17 @@
     body::before {
       content: "";
       position: fixed;
-      inset: 0;
+      top: 50%;
+      left: 50%;
+      width: 100vh;
+      height: 300vw;
       background-image: url('Images/BackgroundCar.png');
-      /* Make each tile a square whose side equals the viewport width,
-         then repeat those tiles vertically after rotation */
-      background-size: 100vw 100vw;
+      /* Background size: width matches viewport height (becomes vertical dimension after rotation) */
+      background-size: 100vh auto;
       background-repeat: repeat-y;
       background-position: top center;
       background-color: var(--black);
-      transform: rotate(90deg);
+      transform: translate(-50%, -50%) rotate(90deg);
       transform-origin: center center;
       z-index: -1;
       pointer-events: none;
@@ -1062,7 +1064,7 @@
     section {
       max-width: 1100px;
       margin: 0 auto;
-      padding-inline: 40px;
+      padding-inline: 60px;
     }
 
     .hero-carousel-wrapper {
@@ -1084,7 +1086,7 @@
     }
 
     .hero-title {
-      font-size: 80px;
+      font-size: 96px;
       line-height: 1.05;
     }
 
@@ -1097,7 +1099,7 @@
     }
 
     .description {
-      max-width: 900px;
+      max-width: 1000px;
       padding-inline: 40px;
     }
 
@@ -1115,7 +1117,7 @@
     }
 
     .schedule-section {
-      max-width: 520px;
+      max-width: 600px;
     }
 
     .discover {
@@ -1137,8 +1139,8 @@
     }
 
     .spot {
-      min-width: 360px;
-      height: 560px;
+      min-width: 380px;
+      height: 600px;
     }
 
     .park-info {
@@ -1161,11 +1163,39 @@
   /* Desktop map layout for Robbie Spottet page */
   .spot-map-section .map-layout {
     display: flex;
-    align-items: stretch;
+    align-items: flex-start;
     gap: 32px;
   }
 
   .spot-map-section .route-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 0 0 220px;
+    margin-top: 12px;
+  }
+
+  .route-button {
+    background: transparent;
+    border: 2px solid var(--pink);
+    color: var(--white);
+    font-family: 'YTMe', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .route-button:hover,
+  .route-button.active {
+    background: var(--pink);
+    color: var(--white);
+  }
+
+  /* Hide arrow buttons on desktop; they stay on mobile */
+  .map-arrow {
     display: none;
   }
 
@@ -1173,79 +1203,19 @@
       flex: 1.4;
     }
 
-    /* Desktop footer: solid black, full width */
+    /* Desktop footer: show background image */
     footer {
       width: 100%;
       max-width: none;
       margin: 0;
       padding-inline: 40px;
-      background-color: var(--black);
-      background-image: none;
-      padding-top: 32px;
-      min-height: auto;
+      background-image: url('Images/DesktopFooter.png');
+      padding-top: 130px;
+      min-height: 300px;
+      
     }
 
     .footer-bg-image {
-      display: none;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    section {
-      padding-inline: 60px;
-    }
-
-    .description {
-      max-width: 1000px;
-    }
-
-    .schedule-section {
-      max-width: 600px;
-    }
-
-    .hero-title {
-      font-size: 96px;
-    }
-
-    .spot {
-      min-width: 380px;
-      height: 600px;
-    }
-
-    /* On larger desktop, move map further right and show route buttons */
-    .spot-map-section .map-layout {
-      align-items: flex-start;
-    }
-
-    .spot-map-section .route-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex: 0 0 220px;
-      margin-top: 12px;
-    }
-
-    .route-button {
-      background: transparent;
-      border: 2px solid var(--pink);
-      color: var(--white);
-      font-family: 'YTMe', sans-serif;
-      font-size: 18px;
-      text-transform: uppercase;
-      padding: 12px 16px;
-      cursor: pointer;
-      text-align: left;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .route-button:hover,
-    .route-button.active {
-      background: var(--pink);
-      color: var(--white);
-    }
-
-    /* Hide arrow buttons on desktop; they stay on mobile */
-    .map-arrow {
       display: none;
     }
   }
