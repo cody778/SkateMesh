@@ -1038,7 +1038,6 @@
   @media (min-width: 768px) {
     body {
       background-position: top center;
-      /* Use a rotated pseudo-element background on desktop */
       background-image: none;
       position: relative;
     }

@@ -124,7 +124,6 @@ if (openBtn && modal) {
   if (confirmBtn) {
     confirmBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      // Add your form submission logic here
       closeModal();
     });
   }
@@ -198,7 +197,6 @@ if (cameraBtn && cameraModal) {
     cameraUploadBtn.addEventListener('click', (e) => {
       e.preventDefault();
       if (fileInput.files && fileInput.files.length > 0) {
-        // Add your upload logic here
         console.log('Uploading file:', fileInput.files[0]);
         // For now, just close the modal
         closeCameraModal();
@@ -603,11 +601,9 @@ function closeMenu() {
 if (burgerMenuBtn) {
   burgerMenuBtn.addEventListener('click', openMenu);
 }
-
 if (slideMenuClose) {
   slideMenuClose.addEventListener('click', closeMenu);
 }
-
 if (slideMenuBackdrop) {
   slideMenuBackdrop.addEventListener('click', closeMenu);
 }

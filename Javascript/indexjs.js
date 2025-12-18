@@ -1,4 +1,4 @@
-const eventBtn = document.querySelector('.event-btn');
+  const eventBtn = document.querySelector('.event-btn');
   const peopleCountEl = document.getElementById('people-count');
   const badge = document.querySelector('.attendance-badge');
 
